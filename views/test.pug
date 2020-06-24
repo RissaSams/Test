@@ -1,0 +1,212 @@
+extends layout
+
+block content
+    h4= locals.title
+
+    table
+        tr
+            td
+                p Switch Test
+                p Enter two numbers, select an operation and click 'Calculate;.
+                form(method="POST", action="/test/math")
+                    table(style='border: 2px solid black')
+                        tr
+                            td First Number
+                            td
+                                input(type="number", name="number1" value=number1)
+                        tr
+                            td
+                                Math Operator
+                            td
+                                select(name="operator")
+                                    option(value="+" selected=(operator === "+")) Add
+                                    option(value="-" selected=(operator === "-")) Subtract
+                                    option(value="/" selected=(operator === "/")) Divide
+                                    option(value="*" selected=(operator === "*")) Multiply
+                                    option(value="%" selected=(operator === "%")) Remainder
+                                    option(value="!" selected=(operator === "!")) Factorial
+                                    option(value="f" selected=(operator === "f")) Fibonacci
+                                    option(value="^" selected=(operator === "^")) Power
+                        tr
+                            td Second Number
+                            td
+                                input(type='number' name="number2" value=number2)
+                        tr
+                            td
+                                input(type="submit"  value="Calculate")
+                                br
+                                input(type="radio" name="output" value="d" checked=(output === "d"))
+                                | 10
+                                input(type="radio" name="output" value="x" checked=(output === "x"))
+                                | 16
+                                input(type="radio" name="output" value="b" checked=(output === "b"))
+                                | 01
+                            td
+                                p= mathResult
+            td
+                p Compare Test
+                p Enter two numbers and respond with which one is larger
+                form(method="POST", action="/test/compare")
+                    table(style='border: 1px dashed blue')
+                        tr
+                            td First Number
+                            td
+                                input(type="number", name="number3" value=number3)
+                        tr
+                            td Second Number
+                            td
+                                input(type="number", name="number4" value=number4)
+                        tr
+                            td
+                                input(type="submit", value="Compare")
+                            td
+                                p= compareResult
+        tr
+            td
+                p Substring test
+                p Copy text from the string from the start to the end values
+                form(method="POST", action="/test/substring")
+                    table(style='border: 1px solid blue')
+                        tr
+                            td String
+                            td
+                                input(type="text", name="text1" value=text1)
+                        tr
+                            td Start
+                            td
+                                input(type="number", name="number5" value=number5)
+                        tr
+                            td End
+                            td
+                                input(type="number", name="number6" value=number6)
+                        tr
+                            td
+                                input(type="submit", value="Substring")
+                            td
+                                p= substringResult
+            td
+                p String Test
+                p How long is it? How many words does it contain? UPPERCASE the string
+                form(method="POST", action="/test/string")
+                    table(style='border: 2px solid orange')
+                        tr
+                            td Test String
+                            td
+                                input(type="text", name="text2" value=text2)
+                        tr
+                            td
+                                input(type="submit", value="String Properties")
+                            td
+                                div= stringResult
+        tr
+            td
+                p String Search Test
+                p Find the Search Word in the Test String
+                p Where was it found, which word?
+                form(method="POST", action="/test/find")
+                    table(style='border: 2px solid darkgreen')
+                        tr
+                            td Test String
+                            td
+                                input(type="text", name="text3" value=text3)
+                        tr
+                            td Search Word
+                            td
+                                input(type="text", name="findWord" value=findWord)
+                        tr
+                            td
+                                input(type="submit", value="Find")
+                            td
+                                p= findResult
+            td
+                p Array Test
+                p Convert Test String to an array of words. Enter a number (Return Word#)
+                p Return the word at this position in the array of words
+                form(method="POST", action="/test/arrays")
+                    table(style='border: 2px dashed blue')
+                        tr
+                            td Test String
+                            td
+                                input(type="text", name="text4", value=text4)
+                        tr
+                            td Return Word
+                            td
+                                input(type="number" name="number7", value=number7)
+                        tr
+                            td
+                                input(type="submit" value="Arrays")
+                            td
+                                p= arraysResult
+        tr
+            td
+                p Date Test
+                p Enter date part to display: H - hour, D - Day, M - Month, m - minute... Be creative!
+                form(method="POST", action="/test/date")
+                    table(style='border: 1px dashed brown')
+                        tr
+                            td Date Part
+                            td
+                                input(type="text", name="datePart", value=datePart)
+                        tr
+                            td
+                                input(type="submit" value="Date")
+                            td
+                                p= dateResult
+            td
+                p Compass Directions
+                p Enter your direction of travel and display the Intercardinal directions of the compass
+                form(method="POST", action="/test/compass")
+                    table(style='border: 3px solid seagreen')
+                        tr
+                            td Angle
+                            td
+                                input(type="number", name="angle", value=angle)
+                        tr
+                            td
+                                input(type="submit" value="Compass")
+                            td
+                                p= compassResult
+        tr
+            td
+                p Temperature Test
+                p Enter Body Temp
+                form(method="POST", action="/test/temp")
+                    table(style='border: 1px dashed blue')
+                        tr
+                            td Body Temp
+                            td
+                                input(type="number", name="temp", value=temp)
+                        tr
+                            td
+                                input(type="submit" value="What to do")
+                            td
+                                p= tempResult
+        tr
+            td
+                p Make a List
+                p CRUD
+                form(method="POST", action="/test/todo")
+                    table(style='border: 2px solid yellow')
+                        tr
+                            td To do today:
+                            td
+                                input(type="text", name="activity", value=activity)
+                        tr
+                            td Duration:
+                            td
+                                input(type="text", name="time", value=time)
+                        tr
+                            td
+                                input(type="submit" name='action' value="Create")
+                                p
+                                input(type="submit" name='action' value="Change")
+                            td
+                                input(type="submit" name='action' value="Remove")
+                                p
+                                input(type="submit" name='action' value="Find")
+            td
+                p What am I doing today?
+                if list
+                    ul
+                        each thing in list
+                            li #{thing.Activity} #{thing.Time}
